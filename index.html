@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f6f2">
+  <title>CampusConnect — Find your next campus event</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- The header introduces CampusConnect and provides quick page navigation. -->
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="CampusConnect home">
+      <span class="brand-icon" aria-hidden="true">C</span>
+      <span>Campus<span class="brand-accent">Connect</span></span>
+    </a>
+    <nav class="header-nav" aria-label="Main navigation">
+      <a class="nav-link active" href="#events">Explore events</a>
+      <a class="nav-link" href="#add-event">Add an event</a>
+    </nav>
+    <a class="header-cta" href="#add-event"><span aria-hidden="true">+</span> Post an event</a>
+  </header>
+
+  <main id="home">
+    <!-- A welcoming banner makes the app's student event-finder purpose clear. -->
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="hero-kicker"><span class="pulse-dot"></span> YOUR CAMPUS, MORE CONNECTED</span>
+        <h1>Make plans.<br><span>Find your people.</span></h1>
+        <p>From late-night hackathons to sunny afternoons on the field, find what’s happening around campus.</p>
+        <a class="hero-link" href="#events">Explore upcoming events <span aria-hidden="true">↘</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-orbit orbit-one"></div>
+        <div class="art-orbit orbit-two"></div>
+        <div class="art-sun"></div>
+        <div class="art-card card-back"><span>✳</span><i></i><i></i></div>
+        <div class="art-card card-front"><span class="art-card-tag">CAMPUS LIFE</span><strong>Good things<br>happen here.</strong><span class="art-card-spark">✦</span></div>
+        <span class="art-float float-one">✦</span>
+        <span class="art-float float-two">●</span>
+      </div>
+      <div class="hero-bottom"><span>GOOD PEOPLE. GOOD PLANS.</span><span>01 — 04 <i></i> DISCOVER</span></div>
+    </section>
+
+    <div class="page-layout">
+      <!-- Event discovery: search and filters update the cards immediately. -->
+      <section class="events-section" id="events">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">WHAT'S HAPPENING</p>
+            <h2>Find your next thing<span class="heading-period">.</span></h2>
+          </div>
+          <span class="event-count" id="event-count">0 events</span>
+        </div>
+
+        <div class="filter-panel">
+          <label class="search-field">
+            <span aria-hidden="true">⌕</span>
+            <span class="sr-only">Search event names and descriptions</span>
+            <input id="event-search" type="search" placeholder="Search events, ideas, and more" autocomplete="off">
+            <kbd>/</kbd>
+          </label>
+          <div class="filter-row">
+            <div class="category-filters" role="group" aria-label="Filter events by category">
+              <button type="button" class="category-chip active" data-category="all" aria-pressed="true">All events</button>
+              <button type="button" class="category-chip" data-category="Technical" aria-pressed="false"><span class="chip-dot technical-dot"></span>Technical</button>
+              <button type="button" class="category-chip" data-category="Cultural" aria-pressed="false"><span class="chip-dot cultural-dot"></span>Cultural</button>
+              <button type="button" class="category-chip" data-category="Sports" aria-pressed="false"><span class="chip-dot sports-dot"></span>Sports</button>
+              <button type="button" class="category-chip" data-category="Workshop" aria-pressed="false"><span class="chip-dot workshop-dot"></span>Workshop</button>
+            </div>
+            <label class="date-filter">
+              <span aria-hidden="true">▦</span>
+              <span class="sr-only">Filter events by date</span>
+              <input id="date-filter" type="date">
+            </label>
+          </div>
+          <button id="clear-filters" class="clear-filters" type="button">Clear filters</button>
+        </div>
+
+        <div class="results-heading">
+          <h3 id="results-title">Upcoming around campus</h3>
+          <span>FRESH PLANS, RIGHT HERE</span>
+        </div>
+        <div id="event-list" class="event-grid" aria-live="polite"></div>
+        <div id="no-events" class="no-events hidden" role="status">
+          <span class="no-events-icon" aria-hidden="true">⌕</span>
+          <h3>No events found</h3>
+          <p>Try another search or clear a filter to see what's happening.</p>
+          <button id="empty-clear-filters" type="button" class="secondary-button">Clear filters</button>
+        </div>
+      </section>
+
+      <!-- The event form adds locally saved listings to the discovery feed. -->
+      <aside class="add-event-section" id="add-event">
+        <div class="form-card">
+          <div class="form-card-heading">
+            <span class="form-icon" aria-hidden="true">✳</span>
+            <p class="section-kicker">HAVE SOMETHING PLANNED?</p>
+            <h2>Bring people<br>together<span class="heading-period">.</span></h2>
+            <p class="form-intro">Share your campus event and help someone find their next favorite thing.</p>
+          </div>
+          <form id="event-form">
+            <div class="form-field">
+              <label for="event-name">Event name <span>*</span></label>
+              <input id="event-name" name="name" type="text" maxlength="90" placeholder="e.g. Design Club Meetup" required>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="event-date">Date <span>*</span></label>
+                <input id="event-date" name="date" type="date" required>
+              </div>
+              <div class="form-field">
+                <label for="event-time">Time <span>*</span></label>
+                <input id="event-time" name="time" type="time" required>
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="event-venue">Venue <span>*</span></label>
+              <input id="event-venue" name="venue" type="text" maxlength="100" placeholder="Building, room, or outdoor space" required>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="event-category">Category <span>*</span></label>
+                <select id="event-category" name="category" required>
+                  <option value="" disabled selected>Choose one</option>
+                  <option value="Technical">Technical</option>
+                  <option value="Cultural">Cultural</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Workshop">Workshop</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="event-organizer">Organizer <span>*</span></label>
+                <input id="event-organizer" name="organizer" type="text" maxlength="70" placeholder="Club or student" required>
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="event-description">A little about it <span>*</span></label>
+              <textarea id="event-description" name="description" rows="3" maxlength="500" placeholder="What should people know before they come?" required></textarea>
+            </div>
+            <button class="submit-button" type="submit">Add to the lineup <span aria-hidden="true">↗</span></button>
+            <p class="form-footnote"><span aria-hidden="true">⌁</span> Events are saved on this device.</p>
+          </form>
+        </div>
+        <div class="side-note"><span aria-hidden="true">✦</span><p>Showing up is where the good stories start.</p></div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Event details are opened in an accessible native dialog. -->
+  <dialog id="event-dialog" class="event-dialog" aria-labelledby="dialog-title">
+    <button id="close-dialog" class="dialog-close" type="button" aria-label="Close event details">×</button>
+    <span id="dialog-category" class="event-category"></span>
+    <h2 id="dialog-title"></h2>
+    <p id="dialog-description" class="dialog-description"></p>
+    <dl class="dialog-details">
+      <div><dt>Date &amp; time</dt><dd id="dialog-datetime"></dd></div>
+      <div><dt>Venue</dt><dd id="dialog-venue"></dd></div>
+      <div><dt>Organized by</dt><dd id="dialog-organizer"></dd></div>
+    </dl>
+  </dialog>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#home"><span class="brand-icon" aria-hidden="true">C</span><span>Campus<span class="brand-accent">Connect</span></span></a>
+    <p>A student-friendly guide to what's happening on campus.</p>
+    <span class="footer-label">MADE FOR CAMPUS LIFE <i>✦</i></span>
+  </footer>
+  <div id="app-message" class="app-message" role="status" aria-live="polite"></div>
+</body>
+</html>
